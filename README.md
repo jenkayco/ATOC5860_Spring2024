@@ -4,4 +4,4 @@ Last updated: last updated April 15, 2024
 
 All code uses python environment culabenv2024.yml
 
-All data are available here: https://o365coloradoedu-my.sharepoint.com/:f:/g/personal/jeka1927_colorado_edu/Ejreu7Z76ZBDmnJwPi1K9J8BgcBisGcmGRwNKXRyPraCIw?e=aXoTfw
+All data that are too large to upload to github are available here: https://o365coloradoedu-my.sharepoint.com/:f:/g/personal/jeka1927_colorado_edu/Epn_AR1zKAZAtv0d9e9cgfEB_tKpj2k8UJCYJeZtUU0F_g?e=GCPGc
