@@ -14591,8 +14591,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="LEARNING-GOALS:">LEARNING GOALS:<a class="anchor-link" href="#LEARNING-GOALS:">&#182;</a></h3><ol>
-<li>Apply self organizing maps as an example of unsupervised (grouping events into different categories) machine learning. Build understanding of the technique within the Asian Monsoon (Bay of Bengal).</li>
-<li>Assess the influence of user specified parameters on the SOM results.  Use Sammon maps and other statistical tests to assess the fit of the SOM the training data.</li>
+<li>Apply self organizing maps as an example of unsupervised (grouping events into different categories) machine learning. Build understanding of the technique for Bay of Bengal circulation (sea level pressure anomaly) and precipitation.</li>
+<li>Assess the influence of user specified parameters on the SOM results.  Use Sammon maps and other statistical tests to assess the fit of the SOM the training data.  Compare a 3x3 node SOM vs. a 4x4 node SOM. You should find that the Sammon map looks better for the 3x3 SOM than for the 4x4 SOM.  The 4x4 sammon map has twisting indicating you may not need so many patterns to describe the data.  Too much twisting = too many nodes.</li>
 <li>Map a composite variable (in this case precipitation) to the self organizing map nodes (in this case based on sea level pressure anomaly).  Understand the added value of associating additional variables to a SOM.</li>
 </ol>
 <h3 id="DATA-and-UNDERLYING-SCIENCE-MOTIVATION:">DATA and UNDERLYING SCIENCE MOTIVATION:<a class="anchor-link" href="#DATA-and-UNDERLYING-SCIENCE-MOTIVATION:">&#182;</a></h3><p>Here, we use self-organizing maps (S0M) to assess patterns of sea level pressure variability and precipitation in the Bay of Bengal. We will be working daily (at 12 UTC) ERA5 reanalysis data from 2020 to 2022.  The dataset is small so that you can tinker without waiting too long.... This entire notebook should run on a personal computer in &lt; 10 minutes.</p>
@@ -14617,14 +14617,16 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### NOTE: To complete this lab, you will need to add packages NOT installed by default in the atoc5860 environment</span>
 <span class="c1">### you will need to install them at the command line before you run this code.</span>
 
-<span class="c1">#### FIRST -- You may want to make a new environment, just in case this breaks something.</span>
+<span class="c1">### FIRST -- You may want to make a new environment, just in case this breaks something.</span>
 <span class="c1">## conda create -n new_environment --clone your_current_environment</span>
 <span class="c1">## e.g. for me, conda create -n culabenv2024_ml --clone culabenv2024</span>
 
-<span class="c1">#### SECOND - activate the new environment and install the relevant package using pip install</span>
+<span class="c1">### SECOND - activate the new environment and install the relevant package using pip install</span>
 <span class="c1">## type "conda activate culabenv2024_ml"</span>
 <span class="c1">## Install the SOM package by typing "pip install GEMA" at the command line.</span>
 <span class="c1">## If you want to download ERA5 data yourself (optional), Install the necessary package by typing  "pip install cdsapi"</span>
+
+<span class="c1">### ALSO -- you'll need the script sammon.py to be stored in the same folder as this notebook for the code to run!</span>
 </pre></div>
 
      </div>
@@ -14951,6 +14953,8 @@ Success!
 <li><strong>period</strong> (indicated by variable 'j'): This will set the training period, which is the number of times that all cases in the training dataset are introduced to the SOM algorithm, thus working to adjust the SOM patterns to better match the data. The period can be any number, but generally, the higher the number, the better trained the SOM will be (too a point, past which the SOM output may be subject to over-fitting). The code is set up below to train with a period of 10000. If you have time, you can try some other options to compare the output. Recommended options to try: 1000, 5000, 50000, 100000 (a choice of 1000 or 5000 will lead to a relatively poorly-trained SOM, but it will take less time to run, so can be used as a check to make sure things are working properly)</li>
 <li><strong>learning rate</strong> (indicated by variable 'k'): This will set the learning rate, which dictates how much a training data case is allowed to change the SOM patterns which introduced to the SOM during training. Learning rate must be a value between 0 and 1, where a higher number means the SOM patterns will be more heavily impacted by each training data case. If you use too low of a learning rate, the SOM patterns may not match the data very well, but if you use too high of a learning rate, the SOM output may be subject to over-fitting. The code is set up below to train with a learning rate of 0.3. If you have time, you can try some other options to compare the output. Recommended options to try: 0.1, 0.2, 0.4, 0.5</li>
 </ul>
+<p>Note that the neighborhood size is specified as the map size minus 1.  You could also tinker with this paramete (initial_neightborhood).</p>
+<p>Here, we have done a subjective sweep of the parameter space - We'll evaluate our parameter selection later.</p>
 
 </div>
 </div>
